@@ -5,28 +5,28 @@ const tema = {
     cores: {
 
         branco: '#FFFFFF',
-        atencao: '',
-        focus: '',
+        atencao: '#FF0E0E',
+        focus: '#B009FF',
 
         primarias: {
             a: '#5754ED',
-            b: '',
-            c: ''
+            b: '#D93114',
+            c: '#168070'
         },
         secundarias: {
             a: '#EBEAF9',
-            b: '',
-            c: ''
+            b: '#FDF8F8',
+            c: '#EBFCF9'
         },
         neutras: {
             a: '#373737',
-            b: '',
-            c: '',
+            b: '#373737',
+            c: '#F5F5F5',
             d: ''
         },
         dark:{
-            a:'',
-            b:''
+            a:'#110EA0',
+            b:'#B61B00'
         }
     },
     espacamentos: {
