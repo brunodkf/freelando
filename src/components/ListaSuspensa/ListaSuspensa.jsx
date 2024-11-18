@@ -37,25 +37,48 @@ const BotaoEstilizado = styled.button`
         border-color: ${props => props.theme.cores.focus};
     }
 `
-
+const ListaSuspensaEstilizada = styled.ul`
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    list-style: none;
+    background: ${props => props.theme.cores.branco};
+`
+const ItemListaSuspensaEstilizada = styled.li`
+    border: 1px solid black;
+    padding: 4px;
+    background: ${props => props.theme.cores.branco};
+    font-weight: 500;
+    color: ${props => props.focoAtivo ? props.theme.cores.focus : 'inherit'};
+    &:hover {
+        color: ${props => props.theme.cores.focus};
+    }
+`
 
 export const ListaSuspensa = ({ label, opcoes }) => {
 
     const [estaAberta, alternarVisibilidade] = useState(false);
+
     const [opcaoFocada, setOpcaoFocada] = useState(null);
 
     const manipularTeclaDoTeclado = (evento) => {
+
         alternarVisibilidade(true)
+
         switch (evento.key) {
             case value = 'ArrowDown':
-                evento.preventDefault()
+                evento.preventDefault();
+
                 setOpcaoFocada(focoAntigo => {
                     if (!focoAntigo) {
                         return 0;
                     }
 
-                    return focoAntigo +=1
+                    return focoAntigo += 1
                 })
+
+
                 break;
 
             default:
@@ -69,23 +92,23 @@ export const ListaSuspensa = ({ label, opcoes }) => {
 
             {label}
 
-            <BotaoEstilizado 
-                onClick={() => alternarVisibilidade(!estaAberta)} 
-                estaAberta={estaAberta} 
+            <BotaoEstilizado
+                onClick={() => alternarVisibilidade(!estaAberta)}
+                estaAberta={estaAberta}
                 onKeyDown={manipularTeclaDoTeclado} >
 
-                Selecione <span>{estaAberta ? '▲' : '▼'}</span> 
+                Selecione <span>{estaAberta ? '▲' : '▼'}</span>
 
             </BotaoEstilizado>
 
             {
                 estaAberta &&
-                <ul>
-                    {opcoes.map(opcao =>
-                        <li key={opcao.value} >
+                <ListaSuspensaEstilizada>
+                    {opcoes.map((opcao, index) =>
+                        <ItemListaSuspensaEstilizada key={opcao.value} focoAtivo={index === opcaoFocada}>
                             {opcao.text}
-                        </li>)}
-                </ul>
+                        </ItemListaSuspensaEstilizada>)}
+                </ListaSuspensaEstilizada>
             }
         </LabelEstilizada>
     )
