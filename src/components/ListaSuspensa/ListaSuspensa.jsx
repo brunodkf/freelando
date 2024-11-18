@@ -83,6 +83,9 @@ export const ListaSuspensa = ({ label, opcoes }) => {
                     if (focoAntigo == null) {
                         return 0;
                     }
+                    if (focoAntigo === (opcoes.length - 1)) {
+                        return opcoes.length - 1
+                    }
                     return focoAntigo += 1
                 })
 
@@ -108,6 +111,16 @@ export const ListaSuspensa = ({ label, opcoes }) => {
                 setOpcaoSelecionada(opcoes[opcaoFocada])
                 break;
 
+            case 'Tab':
+                setOpcaoFocada(null)
+                alternarVisibilidade(false)
+                break;
+
+            case 'Escape':
+                setOpcaoFocada(null)
+                alternarVisibilidade(false)
+                break;
+
             default:
                 break;
         }
@@ -124,20 +137,20 @@ export const ListaSuspensa = ({ label, opcoes }) => {
                 estaAberta={estaAberta}
                 onKeyDown={manipularTeclaDoTeclado} >
 
-                {opcaoSelecionada ? opcaoSelecionada.text : 'Selecione'}  
+                {opcaoSelecionada ? opcaoSelecionada.text : 'Selecione'}
                 <span>{estaAberta ? '▲' : '▼'}</span>
 
             </BotaoEstilizado>
 
-        {estaAberta && <ListaSuspensaEstilizada>
-            {opcoes?.map((opcao, index) => <ItemListaSuspensaEstilizada
-                key={opcao.value}
-                focoAtivo={index === opcaoFocada}
-                onClick={() => setOpcaoSelecionada(opcao)}
+            {estaAberta && <ListaSuspensaEstilizada>
+                {opcoes?.map((opcao, index) => <ItemListaSuspensaEstilizada
+                    key={opcao.value}
+                    focoAtivo={index === opcaoFocada}
+                    onClick={() => setOpcaoSelecionada(opcao)}
                 >
-                {opcao.text}
-            </ItemListaSuspensaEstilizada>)}
-        </ListaSuspensaEstilizada>}
-    </LabelEstilizada>
-   )
+                    {opcao.text}
+                </ItemListaSuspensaEstilizada>)}
+            </ListaSuspensaEstilizada>}
+        </LabelEstilizada>
+    )
 }
